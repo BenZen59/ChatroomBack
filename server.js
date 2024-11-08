@@ -21,9 +21,9 @@ io.on("connection", (socket) => {
   });
 
   // Recevoir un message et l'envoyer à tous les utilisateurs de la salle
-  socket.on("message", ({ room, message }) => {
+  socket.on("message", ({ room, message, senderId }) => {
     console.log(`Message reçu dans la salle ${room}: ${message}`);
-    io.to(room).emit("message", message); // Envoie le message à tous les utilisateurs dans la salle spécifiée
+    io.to(room).emit("message", message, senderId); // Envoie le message à tous les utilisateurs dans la salle spécifiée
   });
 
   socket.on("disconnect", () => {
